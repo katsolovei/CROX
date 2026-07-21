@@ -15,7 +15,6 @@ for column in df.columns:
             print("The dataset contains missing values.")
             break
 
-
 df["MA20"] = df["Close"].rolling(window=20).mean()
 df["MA50"] = df["Close"].rolling(window=50).mean()
 
@@ -31,8 +30,23 @@ for i in range(len(df)):
 
 df["Signal"] = signals
 
-print(df)
+#print(df)
 
+status = ["Hold"]
+
+for i in range(1, len(df)):
+    today_signal = df["Signal"][i]
+    yesterday_signal = df["Signal"][i - 1]
+
+    if today_signal == 1 and yesterday_signal != 1:
+        status.append("BUY")
+    elif today_signal == -1 and yesterday_signal != -1:
+        status.append("SELL")
+    else:
+        status.append("Hold")
+
+df["Status"] = status
+print(df)
 
 
 
