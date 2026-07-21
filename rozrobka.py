@@ -46,7 +46,26 @@ for i in range(1, len(df)):
         status.append("Hold")
 
 df["Status"] = status
+#print(df)
+
+buy_price = 0
+profits = []
+
+for i in range(len(df)):
+    if df["Status"][i] == "BUY" and buy_price == 0:
+        buy_price = df["Close"][i]
+        profits.append(0)
+    elif df["Status"][i] == "SELL" and buy_price != 0:
+        profit = df["Close"][i] - buy_price
+        profits.append(profit)
+        buy_price = 0
+    else:
+        profits.append(0)
+
+df["Profit"] = profits
 print(df)
+print(sum(df["Profit"]))
+
 
 
 
