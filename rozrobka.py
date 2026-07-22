@@ -80,12 +80,12 @@ for i in range(len(df)):
         sell_dates.append(df["Date"][i])
         sell_prices.append(df["Close"][i])
 
-plt.plot(df["Date"], df["Close"], label="Close price", color="black")
-plt.plot(df["Date"], df["MA50"], label="MA50", color="gray")
-plt.plot(df["Date"], df["MA20"], label="MA20", color="silver")
+plt.plot(df["Date"], df["Close"], label="Close price", color="black", linewidth = 1)
+plt.plot(df["Date"], df["MA50"], label="MA50", color="brown", linewidth = 0.8)
+plt.plot(df["Date"], df["MA20"], label="MA20", color="grey", linewidth = 0.8)
 
-plt.scatter(buy_dates, buy_prices,marker="^",label="BUY", color="red")
-plt.scatter(sell_dates,sell_prices, marker="v", label="SELL", color="green")
+plt.scatter(buy_dates, buy_prices,marker="^",label="BUY", color="green")
+plt.scatter(sell_dates,sell_prices, marker="v", label="SELL", color="red")
 
 plt.title("CROX Moving Average Crossover Strategy")
 plt.xlabel("Date")
