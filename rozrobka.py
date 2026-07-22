@@ -63,8 +63,35 @@ for i in range(len(df)):
         profits.append(0)
 
 df["Profit"] = profits
-print(df)
-print(sum(df["Profit"]))
+#print(df)
+#print(sum(df["Profit"]))
+
+buy_dates = []
+buy_prices = []
+sell_dates = []
+sell_prices = []
+
+for i in range(len(df)):
+    if df["Status"][i] == "BUY":
+        buy_dates.append(df["Date"][i])
+        buy_prices.append(df["Close"][i])
+
+    elif df["Status"][i] == "SELL":
+        sell_dates.append(df["Date"][i])
+        sell_prices.append(df["Close"][i])
+
+plt.plot(df["Date"], df["Close"], label="Close price", color="black")
+plt.plot(df["Date"], df["MA50"], label="MA50", color="gray")
+plt.plot(df["Date"], df["MA20"], label="MA20", color="silver")
+
+plt.scatter(buy_dates, buy_prices,marker="^",label="BUY", color="red")
+plt.scatter(sell_dates,sell_prices, marker="v", label="SELL", color="green")
+
+plt.title("CROX Moving Average Crossover Strategy")
+plt.xlabel("Date")
+plt.ylabel("Price, USD")
+plt.legend()
+plt.show()
 
 
 
